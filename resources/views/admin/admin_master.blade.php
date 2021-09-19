@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="{{asset('backend/css/skin_color.css')}}">
     <link rel="stylesheet" href="{{asset('backend/css/side_bar.css')}}">
 
+    {{--  toastr  --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
 </head>
 
 <body class="hold-transition dark-skin sidebar-mini theme-primary fixed">
@@ -312,6 +315,27 @@
 <script src="{{ asset('backend/js/template.js') }}"></script>
 <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+    @if(Session::has('message'))
+    var type = "{{ Session::get('alert-type', 'info') }}"
+    switch(type) {
+        case 'info':
+            toastr.info(" {{ Session::get('message') }} ");
+            break;
+        case 'success':
+            toastr.success(" {{ Session::get('message') }} ")
+            break;
+        case 'warning':
+            toastr.warning(" {{ Session::get('message') }} ")
+            break;
+        case 'error':
+            toastr.error(" {{ Session::get('message') }} ")
+            break;
+    }
+    @endif
+</script>
 
 </body>
 </html>
